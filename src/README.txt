@@ -2,11 +2,7 @@ this folder contains all of the code files used in the analyses, which reference
 
 The subfolders are named after the respective analyses performed by the code within them.
 
-01_scale-models_output-SA-V.blend is a minimialist blender file which scales a 3D model using width measurements and height-width ratios.
-
-demography-timing_Aus-and-NY_data_table-S1.R generates Table S1, which describes the demography and timing of all whales used in the analyses.
-
-The 'How to construct a 3D model in Blender' word document contains detailed instructions for building a 3D model in Blender.
+The 'code-and-guidelines-to-develop-and-scale-3DMs' subfolder contains code and instructions for building, scaling, and identifying optimal 3D models for a marine mammal species.
 
 The 'adults-vs-juvenile_body-proportions' subfolder contains code used to compare the body proportions between adults and juveniles of the scaled humpback whale models and generate figure 3.
 
