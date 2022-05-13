@@ -1,3 +1,6 @@
+############## this file generates table S3 in two separate word documents #####################
+
+
 library(tidyverse)
 
 
@@ -443,7 +446,7 @@ ft3_mod <- delete_part(ft3, 'header') %>% add_header_row(., values='Juvenile', c
 
 autofit(ft3_mod)
 
-save_as_docx(autofit(ft2_mod), path = 'figs/0202_adult-table.docx')
-save_as_docx(autofit(ft3_mod), path = 'figs/0202_juv-table.docx')
+save_as_docx(autofit(ft2_mod), path = 'figs/table-S3a.docx')
+save_as_docx(autofit(ft3_mod), path = 'figs/table-S3j.docx')
 
 

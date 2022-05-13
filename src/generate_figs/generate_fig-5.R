@@ -1,4 +1,4 @@
-
+###### this file calculates the error for the minimal 3D models and elliptical models, and also the full elliptical model relative to the full 3D model ###############
 
 library(tidyverse)
 
@@ -64,7 +64,7 @@ smry_df <- all_methods_cse %>% group_by(Animal_ID, `model and method`, rep_class
 # full model only has 1 value for each animal
 # minimal models have multiple values for each animal, average used below
 # two outliers on right plot at 20 & 25%
-tiff("figs/20220509_3DM_vs_geometric_smry.tiff", units="in", width=6.5, height=6.5, res=300)
+tiff("figs/fig-5_panel-a.tiff", units="in", width=6.5, height=6.5, res=300)
 ggplot(smry_df, aes(`model and method`, mean_error_perc, color = `model and method`)) + 
   geom_violin() + 
   #geom_boxplot() +
@@ -73,11 +73,11 @@ ggplot(smry_df, aes(`model and method`, mean_error_perc, color = `model and meth
   theme_bw() + 
   facet_wrap(vars(rep_class)) +
   ylab('Volume Error (% Total Volume)') +
-  xlab('Model and Method') +
+  #xlab('Model and Method') +
   theme(legend.position = 'none',
         #legend.background = element_blank(),
         #legend.box.background = element_rect(),
-        axis.title.x = element_text(size=16, margin=margin(t=8)),
+        axis.title.x = element_blank(),
         axis.title.y = element_text(size=16, margin=margin(r=8)),
         axis.text.y = element_text(size = 10),
         axis.text.x = element_text(size=12, margin=margin(t=8)),
@@ -86,7 +86,7 @@ ggplot(smry_df, aes(`model and method`, mean_error_perc, color = `model and meth
   scale_color_viridis_d(option = 'C', end=0.7)
 dev.off()
 
-scales::show_col(viridis::viridis(n=3, option = 'C', end = 0.7))
 
-# below is old data, but useful for final figure
+
+
 

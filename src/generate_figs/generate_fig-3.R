@@ -1,4 +1,4 @@
-
+########### this file generates figure 3 ###################
 
 library(tidyverse)
 
@@ -42,21 +42,8 @@ full_model_data$Animal_ID <- as.factor(full_model_data$Animal_ID)
 full_model_data <- full_model_data %>% rename(rep_class = `Repr. class`)
 
 
-
-foo <- full_model_data %>%
-  group_by(segment) %>%
-  t_test(
-    prop_seg_vol ~ rep_class) %>% 
-  adjust_pvalue(method = "bonferroni")
-
-# which segments are different between adults and juveniles?
-filter(foo, p.adj < 0.05)
-
-# only the 18th
-
-
-
-tiff("figs/model-seg-proportions.tiff", units="in", width=6.5, height=4.31, res=300)
+# save the picture
+tiff("figs/fig-3.tiff", units="in", width=6.5, height=4.31, res=300)
 ggplot(full_model_data, aes(x=as.factor(segment), y=prop_seg_vol, color=rep_class)) + geom_boxplot() +
   theme_bw() + 
   theme(legend.position = c(0.85, 0.85),
@@ -65,7 +52,3 @@ ggplot(full_model_data, aes(x=as.factor(segment), y=prop_seg_vol, color=rep_clas
   xlab('Body Segment') +
   scale_color_viridis_d(option='B', begin=0.3, end=0.8)
 dev.off()
-
-
-
-

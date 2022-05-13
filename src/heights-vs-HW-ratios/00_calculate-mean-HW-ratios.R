@@ -75,11 +75,6 @@ ft3 <- flextable(data=better_table) %>% set_header_labels(hw_int = "Percent Tota
 autofit(ft3)
 
 
-
-
-# generate table S2
-save_as_docx(autofit(ft3), path = 'figs/table_S2.docx')
-
 # write height data to csv for height vs HW scaling
 write_csv(DLD_fake_meas, file='data_minimized/L1/0508_new-height-data.csv')
 

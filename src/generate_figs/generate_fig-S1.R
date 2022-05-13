@@ -1,3 +1,5 @@
+#### this file generates figure S1 #############
+
 
 library(tidyverse)
 
@@ -135,11 +137,9 @@ plot_df$group_var <- factor(plot_df$group_var, levels = c('Surface Area Metric \
 
 library(scales)
 
-show_col(viridis_pal(alpha=1, option = 'E')(10))
-
 my_cols <- viridis_pal(alpha=1, option = 'C')(10)[c(6,7)]
 
-tiff("figs/Fig-S1.tiff", units="in", width=6.5, height=4.5, res=300)
+tiff("figs/fig-S1.tiff", units="in", width=6.5, height=4.5, res=300)
 ggplot(plot_df, aes(group_var, normalized_BCI, fill=method)) + 
   geom_bar(stat='identity', width = 0.75, position = position_dodge(width = 1)) + 
   geom_point() +
@@ -156,33 +156,6 @@ dev.off()
 
 
 
-# make a new column with normalized_BCI +/- std_dev
-bier_vol_sa <- bier_vol_sa  %>%
-  mutate(combined_vals = paste(round(normalized_BCI,3), " ", round(std_dev,3))) 
 
-
-bier_vol_sa %>% group_by(method) %>%
-  mutate(normalized_BCI_diff = max(normalized_BCI) - min(normalized_BCI))
-# calculate difference in normalized_BCI for each method
-# calculated combined std_dev
-# paste them together and round correctly
-# transform into table format
-bier_vol_sa <- bier_vol_sa %>% group_by(method) %>%
-  mutate(normalized_BCI_diff = max(normalized_BCI) - min(normalized_BCI),
-         combined_std_dev = sqrt(std_dev[1]^2 + std_dev[2]^2)) %>%
-  mutate(combined_diff_vals = paste(sprintf(round(normalized_BCI_diff,3), fmt = '%#.3f'), " ", sprintf(round(combined_std_dev,3), fmt = '%#.3f'))) %>%
-  select(Animal_ID, method, combined_vals, combined_diff_vals) %>% pivot_wider(names_from = Animal_ID, values_from = c(combined_vals))
-
-
-df2 <- bier_vol_sa[,c(1,3,4,2)]
-
-df2$method <- c('normalized BVI', 'normalized BAI')
-
-library(flextable)
-
-ft1 <- flextable(data=df2) %>% set_header_labels(method = "Body Condition Metric", combined_diff_vals = "Difference in Body Condition", skinny = "Poor Body Condition", fat = 'High Body Condition') %>%
-  theme_booktabs()
-
-autofit(ft1)
 
 

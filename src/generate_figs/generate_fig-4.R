@@ -1,3 +1,4 @@
+########### this file generates figure 4 ################
 
 library(tidyverse)
 
@@ -97,7 +98,7 @@ both_rep_cse$rep_class <- str_to_title(both_rep_cse$rep_class)
 
 # below df is for experimenting with aesthetic options
 #small_both_rep_cse <- sample_n(both_rep_cse, 13000)
-tiff("figs/Fig_4.tiff", units="in", width=6.5, height=4.31, res=300)
+tiff("figs/fig-4.tiff", units="in", width=6.5, height=4.31, res=300)
 ggplot(filter(both_rep_cse, n_widths > 0), aes(as.factor(n_widths), y=prop_error*100, color=as.factor(n_widths))) +
   geom_jitter(size=0.1) +
   theme_bw() +

@@ -1,3 +1,5 @@
+#### this file generates table S2 ######################
+
 
 library(tidyverse)
 
@@ -78,10 +80,6 @@ autofit(ft3)
 
 
 # generate table S2
-save_as_docx(autofit(ft3), path = 'figs/table_S2.docx')
+save_as_docx(autofit(ft3), path = 'figs/table-S2.docx')
 
-# write height data to csv for height vs HW scaling
-write_csv(DLD_fake_meas, file='data_minimized/L1/0508_new-height-data.csv')
 
-# write HW ratios to csv for above comparison and all other scalings
-write_csv(blender_ready_hw, file='data_minimized/L1/20220508_new-HW-data.csv')

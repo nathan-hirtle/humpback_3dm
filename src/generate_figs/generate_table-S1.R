@@ -1,9 +1,10 @@
+########## this file generates table S1 ######################
+
 
 library(tidyverse)
 
-setwd('C:/Users/nhirtle/Documents/Stony_Brook_all/Hirtle_Cetacean_Morphometrics/humpback_3dm')
 
-Dorso_lateral_data <- read_table("data/L0/Dorso.lateral.data.2017.2020.2021.txt")
+Dorso_lateral_data <- read_table("data_minimized/L0/Dorso.lateral.data.2017.2020.2021.txt")
 
 colnames(Dorso_lateral_data) <- c('ID', 'rep_class', 'location', paste('w', as.character(seq(0.05, 0.95, 0.05)), sep = ''), paste('h', as.character(seq(0.05, 0.95, 0.05)), sep = ''), 'drslname', 'latname')
 
@@ -25,7 +26,7 @@ data_in_analysis <- data_in_analysis %>% mutate(
   month = lubridate::month(date),
   year = lubridate::year(date),
   dataset = 'Australia'
-  )
+)
 
 # how do we want to present this data?
 # one row for each individual with dates and location?
@@ -44,7 +45,7 @@ library(flextable)
 # autofit(ft1)
 
 # read in NY data
-NY_data <- read_csv('data/L1/0215_morphs_58-whales.csv')
+NY_data <- read_csv('data_minimized/L0/0215_morphs_58-whales.csv')
 
 `%ni%` <- Negate(`%in%`)
 
@@ -58,15 +59,15 @@ NY_data <- NY_data %>% mutate(
                    startsWith(Image, 'final_formeas_file____Users_EIH_Documents') ~ '2021-10-15')) %>% 
   
   mutate(
-  
-  date = anytime::anydate(date),
-  dataset = 'New York',
-  location = '--',
-  Animal_ID = ifelse(Animal_ID==lag(Animal_ID, default = 'nada'), paste0(Animal_ID, '_1'), Animal_ID),
-  Animal_ID = ifelse(Animal_ID=='TLSCAR', 'TL0085', Animal_ID),
-  rep_class = stringr::str_to_title(rep_class)
-  
-) %>% filter(Animal_ID %ni% c('TL0092_1', 'TL0093_1')) # remove the 2 repeats
+    
+    date = anytime::anydate(date),
+    dataset = 'New York',
+    location = '--',
+    Animal_ID = ifelse(Animal_ID==lag(Animal_ID, default = 'nada'), paste0(Animal_ID, '_1'), Animal_ID),
+    Animal_ID = ifelse(Animal_ID=='TLSCAR', 'TL0085', Animal_ID),
+    rep_class = stringr::str_to_title(rep_class)
+    
+  ) %>% filter(Animal_ID %ni% c('TL0092_1', 'TL0093_1')) # remove the 2 repeats
 
 
 
@@ -84,5 +85,5 @@ ft1 <- flextable(data=table_df) %>% set_header_labels(dataset = 'Dataset', locat
 
 autofit(ft1)
 
-save_as_docx(autofit(ft1), path = 'figs/0510_table-S1.docx')
+save_as_docx(autofit(ft1), path = 'figs/table-S1.docx')
 
